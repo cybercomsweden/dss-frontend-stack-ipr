@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>IPR Frontend stack</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/white.css" id="theme">
+		<link rel="stylesheet" href="lib/css/github-gist.css">
+		<style>
+		.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+			text-transform: none;
+		}
+		code, pre {
+			outline-color: invert;
+		}
+		::selection {
+		  background-color: rgb(248, 238, 199) !important;
+			color: inherit;
+		}
+		.red { color: rgb(255, 0, 0); }
+		.img {
+			border:none !important;
+			box-shadow:none !important;
+		}
+		</style>
+	</head>
+
+	<body class="reveal-viewport theme-font-montserrat theme-color-white-blue" spellcheck="false">
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>IPR frontend stack</h1>
+					<p class="fragment">And a demo of Vue.js</p>
+					<br>
+					<small>Use arrow keys for navigation</small><br>
+					<small>See overview by pressing <code>ESC</code></small><br>
+				</section>
+
+				<section>
+					<h3>Lets start a new web project!</h3>
+					<div class="fragment">
+						<p class="fragment shrink">Which JS-framework should we use?</p>
+						<p class="fragment">What problems needs to be solved?</p>
+					</div>
+				</section>
+
+				<section>
+					<h3>Requirements for IPR</h3>
+					<ul>
+						<li>SPA application</li>
+						<li>Routing</li>
+						<li>Communication with REST-server</li>
+						<li>i18n (not sure, but probably)</li>
+						<li>TDD &amp; Code coverage</li>
+						<li>ES6 / ESLint with Airbnb-styleguide (standard for DSS JS-projects)</li>
+					</ul>
+
+					<div class="fragment">
+						<h4>Other "nice to have"-requirements</h4>
+						<ul>
+							<li>Should be easy to change libraries/modules</li>
+							<li>Modern frontend stack (ES6/ES7)</li>
+							<li>No global CLI tools/modules (no <code>npm install -g</code>)</li>
+							<li>KISS - so new developers should learn fast</li>
+						</ul>
+					</div>
+				</section>
+
+				<section>
+					<p>Language: ES6 with Babel</p>
+					<img class="img" src="lib/img/babel.png">
+					<section>
+						<br>
+						<p class="fragment">* More popular than e.g TypeScript</p>
+						<p class="fragment">* It is the standard, and we like standard.</p>
+					</section>
+				</section>
+
+				<section>
+					<p>Dependency management: npm</p>
+					<img class="img" src="lib/img/npm.png">
+					<section>
+						<br>
+						<p class="fragment">* Install and run everything with npm (<code>npm run &lt;task&gt;</code>)</p>
+						<p class="fragment">* No bower</p>
+						<p class="fragment">* No grunt/gulp/brocolli/cli/whatever</p>
+						<p class="fragment">* We <u>should</u> use Shrinkwrap and Artifactory, but we don't yet</p>
+					</section>
+				</section>
+
+				<section>
+					<p>Linting ESLint with Airbnb styleguide</p>
+					<img class="img" src="lib/img/eslint.png">
+					<section>
+						<br>
+						<p class="fragment">* JSLint is outdated</p>
+						<p class="fragment">* Popular in the JS community</p>
+						<p class="fragment">* <a href="https://confluence.dss.husqvarnagroup.com/display/DSS/Web+frontend">DSS standard</a></p>
+					</section>
+				</section>
+
+				<section>
+					<p>Build tool: Webpack<p>
+					<img class="img" src="lib/img/webpack.png">
+
+					<section>
+						<br><br><br><br><br><br>
+						<p class="fragment">* Step learning curve... :/</p>
+						<p class="fragment">* Handles all main module formats (CommonJS, AMD, globals)</p>
+						<p class="fragment">* Loads images, css, html - <a href="https://webpack.github.io/docs/list-of-loaders.html">everything you want</a></p>
+						<p class="fragment">* Dev-server with hot reload out of the box</p>
+						<p class="fragment">* Fingerprinting out of the box</p>
+					</section>
+				</section>
+
+				<section>
+					<p>Testrunner: Karma Jasmine<p>
+					<img class="img" src="lib/img/karma.png">
+					<br>
+					<p class="fragment">Easy to use and very popular</p>
+					<p class="fragment">Good <a href="http://jasmine.github.io/edge/introduction.html">documentation</a></p>
+					<p class="fragment">Handles asynchronous tests</p>
+					<p class="fragment">Easy to mock/spy on objects</p>
+				</section>
+
+				<section>
+					<p>Environment: S3 via Cloudfront</p>
+					<br>
+					<p class="fragment">No need for us to use DynanmoDB as in <a href="https://confluence.dss.husqvarnagroup.com/display/DSS/Javascript+S3+deployments">SG</a>
+					<p class="fragment"><code>aws cloudfront create-invalidation --distribution-id S11A16G5KZMEQD /*</code></p>
+				</section>
+
+				<section>
+					<section>
+						<p>View library: Vue.js</p>
+						<img class="img" src="lib/img/vue.png">
+					</section>
+					<section>
+						<p>Vue.js</p>
+						<ul>
+							<li>Reactive DOM-templates - no virtual-dom (like React) or dirty-checking (like Angular 1.x)</li>
+							<li>Component based view/MVVM library</li>
+							<li>Rapidly growing community since release of 1.0</li>
+							<li>Very easy to start with (and to work with, when the code base grows)</li>
+							<li>Great documentation resources</li>
+						</ul>
+					</section>
+
+					<section>
+						<p>Vue.js</p>
+						<ul>
+							<li>Some official libraries: <code>vue-router / vue-touch / vue-validator / vuex / vue-resource</code></li>
+							<li>Recommends webpack with CommonJS and ES6</li>
+							<li>The model is a pure JS-object</li>
+						</ul>
+					</section>
+
+					<section>
+						<ul>
+							<li>State management: vuex / revue</li>
+							<li><a href="https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd?hl=en">Vue-devtools</a></li>
+						</ul>
+						<img class="img" src="lib/img/vuex.gif">
+					</section>
+
+					<section>
+						<p>Vue.js</p>
+						<p>Con: 99% of all code from one maintainer.</p>
+						<img src="lib/img/vue-problem.png">
+						<a href="https://hashnode.com/ama/with-evan-you-cilauq0uu0027tl53gsjkhbmd">https://hashnode.com/ama/with-evan-you-cilauq0uu0027tl53gsjkhbmd</a>
+					</section>
+				</section>
+
+				</section>
+
+				<section>
+					<h4>Hello Vue</h4>
+					<section>
+						index.html
+						<pre class="html"><code contenteditable>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"/&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;app-component&gt;&lt;/app-component&gt;
+    &lt;script src="main.js"&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+					</code></pre>
+				</section>
+
+				<section>
+					main.js
+					<pre class="javascript"><code contenteditable>
+import Vue from 'vue';
+import AppComponent from './appComponent';
+
+new Vue({
+  el: 'body',
+  components: {
+    AppComponent
+  }
+});
+</code></pre>
+			</section>
+
+
+			<section>
+				appComponent.js
+				<pre class="javascript"><code contenteditable>
+import PostService from './postService';
+import template from './template.html';
+
+const AppComponent = {
+  template,
+
+ /**
+  * Initial data, so Vue know what properties
+  * to create wrapper with reactive getters/setters
+  * for.
+  */
+  data() {
+    return {
+      text: '',
+      message: {
+        created: new Date,
+        text: ''
+      },
+      posts: []
+    }
+  },
+
+ /**
+  * Component instance method that are being called by Vue once, when the component is created.
+  * We also got attached() / init() and detached()
+  */
+  created() {
+    this.$service = new PostService();
+  },
+
+ /**
+  * Methods that can be called from the template
+  */
+  methods: {
+    addNew() {
+      if (this.text.length < 3) {
+        return;
+      }
+
+      const message = {
+        text: this.text,
+        created: new Date
+      };
+
+      return this.$service.create(message).then(() => {
+        this.text = '';
+        this.posts.push(message);
+      });
+    },
+
+    remove(post) {
+      // Shorthand method for removing a object in a array
+      this.posts.$remove(post);
+    }
+  }
+};
+
+export default AppComponent;
+</code></pre>
+		</section>
+
+		<section>
+			app-component-template.html
+			<pre class="html"><code contenteditable>
+&lt;input @keyup.enter="addNew()" type="text" v-model="text"&gt;
+&lt;div&gt;
+  {{ text.length > 2 ? 'Ok to save!' : 'Need at least 3 chars' }}
+&lt;/div&gt;
+&lt;p&gt;Number of posts: &lt;strong&gt;{{ posts.length }}&lt;/strong&gt;
+&lt;div v-for="post in posts"&gt;
+  &lt;div&gt;
+    &lt;p&gt;{{ parseInt($index + 1) }}. {{ post.text }}&lt;/p&gt;
+    &lt;button type="button" @click="remove(post)"&gt;Remove&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+		</code></pre>
+	</section>
+
+	<section>
+		<a href="http://www.webpackbin.com/NJzQTXQ0x">Webpackbin Demo</a>
+	</section>
+
+	</section>
+
+
+	<section>
+		<h3>Vue design decisions</h3>
+		<p>Keep Vue-components small, place logic in separate classes.</p>
+		<p>Prefix none reactive properties with <code>$</code> so Vue don't convert the object to reactive getters/setters.</p>
+		<p>Inject dependencies in <code>attached()</code> or <code>created()</code> depending on the components lifecycle.</p>
+	</section>
+
+	<section>
+		<h2>IPR Demo</h2>
+	</section>
+
+			<section style="font-size: 24px;">
+				<h1>Links</h1>
+				<ul>
+					<li>
+							ES6
+							<ul>
+								<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference</a></li>
+								<li><a href="https://ponyfoo.com/articles/tagged/es6">https://ponyfoo.com/articles/tagged/es6</a></li>
+								<li><a href="http://es6-features.org/">http://es6-features.org/</a></li>
+								<li><a href="http://es6fiddle.net">http://es6fiddle.net</a> (try ES6 in browser)</li>
+							</ul>
+					</li>
+
+					<li>
+						Vue.js
+						<ul>
+							<li><a href="http://vuejs.org">http://vuejs.org</li>
+							<li><a href="https://vuejs.org/guide/">https://vuejs.org/guide/</li>
+							<li><a href="http://vuejs.github.io/vue-router/en/index.html">Vue-router documentation</a></li>
+							<li><a href="https://laracasts.com/series/learning-vuejs">Video tutorials</a> (warning: 0.12 release)</li>
+							<li><a href="https://vuejs.org/api/">API documentation</li>
+							<li><a href="http://blog.pusher.com/exploring-real-time-apps-with-vuejs-es2016-and-webpack/">http://blog.pusher.com/exploring-real-time-apps-with-vuejs-es2016-and-webpack/</a></li>
+						</ul>
+					</li>
+					<li>
+							Webpack
+							<ul>
+								<li><a href="https://webpack.github.io/">https://webpack.github.io/</a></li>
+								<li><a href="http://www.webpackbin.com">http://www.webpackbin.com</a> (try webpack in browser)</li>
+							</ul>
+					</li>
+					<li>
+							Jasmine
+							<ul>
+								<li><a href="http://jasmine.github.io/edge/introduction.html">http://jasmine.github.io/edge/introduction.html</a></li>
+							</ul>
+					</li>
+
+			</section>
+
+		</div>
+
+		<!-- OBS: Endast för presentationen, såhär inkluderar man normalt inte kod -->
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+		<script src="js/babel.js"></script>
+
+		<script>
+			'use strict';
+
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: () => hljs.initHighlightingOnLoad() },
+					{ src: 'plugin/zoom-js/zoom.js', async: true }
+				]
+			});
+
+			class ReadyHandler {
+				constructor(nodes) {
+					nodes.forEach(el => el.addEventListener('keydown', e => this.consumeKeyDownEvents(el, e)));
+				}
+
+				consumeKeyDownEvents(el, e) {
+					if (e.shiftKey && e.keyCode === 13) {
+						e.preventDefault();
+
+						hljs.highlightBlock(el);
+						var transpiled = babel.transform(el.innerText, {
+							stage: 0
+						}).code;
+						new Function(transpiled)();
+					}
+				}
+			}
+
+			document.addEventListener('DOMContentLoaded', () => {
+				new ReadyHandler([...document.querySelectorAll('code[contenteditable]')]);
+
+				[...document.querySelectorAll('code:not([contenteditable])')].forEach(el => el.style.color = 'red');
+			});
+		</script>
+
+	</body>
+</html>
